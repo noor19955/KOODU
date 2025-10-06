@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>الوسائط المتعددة — تعريف، أنواع وأهمية</title>
+  <style>
+    :root{
+      --muted:#2b2b2b;
+      --accent:#0066cc;
+      --accent-2:#00bfa5;
+      --card:#ffffffcc;
+      --glass-border: rgba(255,255,255,0.18);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Tahoma, Arial, "Noto Naskh Arabic", sans-serif;
+      color:var(--muted);
+      direction:rtl;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background: linear-gradient(180deg, #f7fcff 0%, #eef9f7 40%, #fffaf6 100%);
+      position:relative;
+      overflow-x:hidden;
+    }
+    body::before, body::after{content:"";position:fixed;left:50%;transform:translateX(-50%);width:140vw;height:60vh;pointer-events:none;z-index:0;filter: blur(24px);opacity:0.95;border-radius:40%;}
+    body::before{top:-10vh;background: radial-gradient(60% 50% at 20% 20%, rgba(0,191,165,0.20), transparent 25%), linear-gradient(120deg, rgba(0,102,204,0.14), rgba(0,191,165,0.08));animation: floatSlow 18s ease-in-out infinite;}
+    body::after{bottom:-12vh;background: radial-gradient(60% 50% at 80% 80%, rgba(0,102,204,0.12), transparent 20%), linear-gradient(60deg, rgba(255,150,70,0.06), rgba(0,191,165,0.04));animation: floatSlow 22s ease-in-out infinite reverse;}
+    @keyframes floatSlow{0%{transform:translateX(-50%) translateY(0) rotate(0deg);}50%{transform:translateX(-50%) translateY(-18px) rotate(2deg);}100%{transform:translateX(-50%) translateY(0) rotate(0deg);}}
+
+    .gradient-overlay{position:fixed;inset:0;z-index:0;pointer-events:none;background: linear-gradient(135deg, rgba(0,102,204,0.02), rgba(0,191,165,0.02) 30%, rgba(255,170,100,0.01));mix-blend-mode:overlay;}
+
+    header{position:relative;padding:28px 22px;z-index:2;display:flex;align-items:center;gap:18px;}
+    .logo{width:70px;height:70px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;box-shadow:0 10px 30px rgba(0,102,204,0.14);}
+    h1{margin:0;font-size:20px}
+    .tag{font-size:13px;color:rgba(0,0,0,0.55)}
+
+    main{position:relative;z-index:2;padding:16px;max-width:1100px;margin:6px auto 60px;}
+
+    .hero{display:flex;gap:20px;align-items:center;background:var(--card);border-radius:14px;padding:22px;box-shadow:0 12px 30px rgba(12,40,80,0.06);border:1px solid var(--glass-border);overflow:hidden;}
+    .hero .left{flex:1}
+    .hero h2{margin:0 0 8px;font-size:28px;color:var(--muted)}
+    .hero p{margin:0 0 12px;line-height:1.7;color:rgba(0,0,0,0.7)}
+
+    .ctas{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,0.06);background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;transition:transform .14s ease,box-shadow .14s ease,opacity .14s ease;}
+    .btn:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(0,0,0,0.10)}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(0,102,204,0.12);box-shadow:none;font-weight:600;}
+
+    .panel{margin-top:18px;background:rgba(255,255,255,0.88);padding:18px;border-radius:12px;border:1px solid var(--glass-border);box-shadow:0 10px 30px rgba(5,20,40,0.04);}
+    .panes{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    .panes .side{display:flex;flex-direction:column;gap:12px;align-items:stretch;}
+
+    section{display:none}
+    section.active{display:block}
+    .card{background:linear-gradient(180deg,#ffffff,#fbfeff);padding:14px;border-radius:10px;border:1px solid rgba(0,0,0,0.04);}
+
+    .media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;align-items:start;}
+    .media-item{border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.04);background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:0 8px 20px rgba(10,30,60,0.04);cursor:pointer;}
+    .media-item img, .media-item video{display:block;width:100%;height:200px;object-fit:cover}
+    .media-caption{padding:10px;font-size:13px;color:rgba(0,0,0,0.65)}
+    .video-wrap{margin-top:14px;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.04)}
+    .video-wrap video{width:100%;height:360px;object-fit:cover;display:block}
+
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:40;padding:18px;}
+    .lightbox.active{display:flex}
+    .lightbox .content{max-width:1100px;width:100%;border-radius:12px;overflow:hidden;background:#fff}
+    .lightbox img, .lightbox video{width:100%;height:auto;display:block}
+    .lightbox .close{position:absolute;top:18px;left:18px;background:rgba(255,255,255,0.9);border-radius:8px;padding:8px 10px;cursor:pointer;font-weight:700;}
+
+    h3{margin:0 0 8px}
+    p{margin:0 0 12px;color:rgba(0,0,0,0.75);line-height:1.7}
+    ul{margin:6px 0 12px;padding-left:20px}
+    li{margin-bottom:8px}
+
+    footer{max-width:1100px;margin:26px auto 48px;text-align:center;color:rgba(0,0,0,0.45);font-size:13px}
+
+    @media(max-width:900px){
+      .panes{grid-template-columns:1fr}
+      .hero{flex-direction:column;align-items:flex-start}
+      .media-grid{grid-template-columns:1fr}
+      .media-item img, .media-item video{height:220px}
+      .video-wrap video{height:220px}
+    }
+  </style>
+</head>
+<body>
+  <div class="gradient-overlay" aria-hidden="true"></div>
+
+  <header>
+    <div class="logo">MM</div>
+    <div>
+      <h1>الوسائط المتعددة — Multimedia</h1>
+      <div class="tag">تعريف ـ أنواع ـ أهمية • عرض موجز تعليمي</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero" role="banner" aria-labelledby="hero-title">
+      <div class="left">
+        <h2 id="hero-title">ماذا نعني بالوسائط المتعددة؟ ولماذا تهتمّ بها المؤسسات؟</h2>
+        <p>الوسائط المتعددة هي مزيج من نصوص، صور، صوت، فيديو، ورسوم متحركة تُستخدم معًا لعرض معلومات أو تجربة تفاعلية. تساعد الوسائط المتعددة على إيصال الأفكار بسرعة، زيادة التفاعل، وتيسير الفهم — من التعليم إلى التسويق والإعلام.</p>
+
+        <div class="ctas" role="navigation" aria-label="روابط المحتوى">
+          <button class="btn" data-target="content">عن محتواها</button>
+          <button class="btn" data-target="types">عن أنواعها</button>
+          <button class="btn" data-target="importance">عن أهميتها</button>
+        </div>
+      </div>
+
+      <aside style="width:320px" aria-hidden="false">
+        <div class="card">
+          <h3>لمحة سريعة</h3>
+          <p class="muted">اختر أي زر أعلاه لعرض القسم التفصيلي — التصميم هنا مُحسّن للقراءة العربية ويعمل على شاشات الجوال والكمبيوتر.</p>
+          <div style="margin-top:12px">
+            <span class="pill">تعليم</span>
+            <span class="pill" style="margin-inline-start:8px">تسويق</span>
+            <span class="pill" style="margin-inline-start:8px">تجارب</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="panes" style="margin-top:16px">
+      <div>
+        <section id="content" class="active panel" aria-labelledby="content-title">
+          <h3 id="content-title">عن محتواها — أمثلة مرئية</h3>
+          <p>اضغط على أي صورة لمشاهدتها بحجم أكبر. الملفات الثلاثة التالية متواجدة مع صفحة الـHTML بنفس المجلد: <strong>1.avif</strong> ، <strong>2.avif</strong> ، <strong>3.avif</strong>.</p>
+          <div class="media-grid" aria-hidden="false">
+            <!-- الصورة الأولى -->
+            <div class="media-item" data-type="image" data-src="1.avif">
+              <picture>
+                <source srcset="1.avif" type="image/avif">
+                <img src="1.avif" alt="انفوغرافيك توضيح لمعنى الفيديو" loading="lazy">
+              </picture>
+              <div class="media-caption">انفوغرافيك توضيح لمعنى الفيديو</div>
+            </div>
+
+            <!-- الصورة الثانية -->
+            <div class="media-item" data-type="image" data-src="2.avif">
+              <picture>
+                <source srcset="2.avif" type="image/avif">
+                <img src="2.avif" alt="مكوّن صور — رسم توضيحي" loading="lazy">
+              </picture>
+              <div class="media-caption">مثال: صورة ثابتة لتوضيح فكرة</div>
+            </div>
+
+            <!-- الصورة الثالثة -->
+            <div class="media-item" data-type="image" data-src="3.avif">
+              <picture>
+                <source srcset="3.avif" type="image/avif">
+                <img src="3.avif" alt="مكوّن إنفوجرافي" loading="lazy">
+              </picture>
+              <div class="media-caption">انفوغرافيك لتوضيح معنى النص</div>
+            </div>
+          </div>
+
+          <!-- فيديو توضيحي: إن لم يكن لديك فيديو يمكنك إزالة هذا العنصر -->
+          <div class="video-wrap" style="margin-top:16px">
+            <video id="demoVideo" controls preload="metadata" poster="" playsinline>
+             
+              <source src="4.mp4" type="video/mp4">
+              متصفحك لا يدعم عنصر الفيديو.
+            </video>
+            <div class="media-caption" style="text-align:left;padding:10px 14px">مقطع توضيحي </div>
+          </div>
+
+        </section>
+
+        <section id="types" class="panel" aria-labelledby="types-title">
+          <h3 id="types-title">عن أنواعها — تصنيفات عملية للوسائط المتعددة</h3>
+          <p>يمكن تصنيف الوسائط المتعددة بعدة طرق. فيما يلي تصنيف عملي ومفيد:</p>
+          <ul>
+            <li><strong>تفاعلية مقابل غير تفاعلية:</strong> تفاعلية (تدريب إلكتروني تفاعلي، ألعاب تعليمية) تُتيح للمستخدم اتخاذ قرارات؛ غير تفاعلية (فيديو توضيحي، بودكاست).</li>
+            <li><strong>خطية مقابل غير خطية:</strong> خطية تعرض المحتوى بتسلسل ثابت (مثل الفيديو)، غير خطية تسمح بالتنقل الحر (مواقع ويب تفاعلية، خرائط معرفية).</li>
+            <li><strong>تعليمية، ترفيهية، تسويقية:</strong> حسب الهدف — كل غرض يفرض أسلوبًا ومقاييس جودة مختلفة.</li>
+            <li><strong>تعدد المنصات:</strong> محتوى مخصص للويب، تطبيقات الهواتف، الواقع الافتراضي/المعزز.</li>
+          </ul>
+          <p class="muted">نقطة مهمّة: اختيار النوع يعتمد على الجمهور، الهدف، وقيود الميزانية والوقت.</p>
+        </section>
+
+        <section id="importance" class="panel" aria-labelledby="importance-title">
+          <h3 id="importance-title">عن أهميتها — لماذا نستخدم الوسائط المتعددة؟</h3>
+          <p>الوسائط المتعددة أصبحت حجر الزاوية للاتصال الحديث لعدة أسباب عملية:</p>
+          <ul>
+            <li><strong>تعزيز الفهم والذاكرة:</strong> الدمج بين البصر والسمع يزيد من استبقاء المعلومات.</li>
+            <li><strong>جذب الانتباه:</strong> المحتوى المتعدد العناصر أكثر جاذبية من نصٍ طويلٍ بحت.</li>
+            <li><strong>إتاحة التعلم المتباين:</strong> تلائم أنماط تعلم مختلفة (سمعي، بصري، حركي).</li>
+            <li><strong>زيادة التفاعل:</strong> عناصر تفاعلية تشجع على المشاركة والتقييم الفوري.</li>
+            <li><strong>قابلية المشاركة:</strong> فيديو قصير أو إنفوجرافي يُعاد مشاركته ويزيد الوصول والانتشار.</li>
+            <li><strong>قيمة تجارية ووظيفية:</strong> تستخدمها الشركات في التدريب، الدعم الفني، والتسويق لمنتجاتها بكفاءة.</li>
+          </ul>
+          <p>باختصار: الوسائط المتعددة ليست رفاهية — بل أداة فعّالة لترشيد الرسالة وإيصالها بأقل مجهود وسرعة أكبر.</p>
+        </section>
+      </div>
+
+      <aside class="side">
+        <div class="card" aria-hidden="false">
+          <h3>اختصارات سريعة</h3>
+          <p class="muted">روابط سريعة للتنقّل داخل الصفحة:</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <button class="btn ghost" data-target="content">🔹 عن محتواها</button>
+            <button class="btn ghost" data-target="types">🔹 عن أنواعها</button>
+            <button class="btn ghost" data-target="importance">🔹 عن أهميتها</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3>معلومة إثرائية</h3>
+          <p class="muted">الوسائط المتعددة تعزز إيصال الفكرة و المعلومة بوضوح و دقة </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    © حقوق المحتوى — نموذج تعليمي عن الوسائط المتعددة
+  </footer>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+    <button class="close" id="lightboxClose">إغلاق ✕</button>
+    <div class="content" id="lightboxContent" aria-live="polite"></div>
+  </div>
+
+  <script>
+    // Navigation
+    const navButtons = document.querySelectorAll('[data-target]');
+    const sections = document.querySelectorAll('main section');
+    function navigateTo(id){
+      sections.forEach(s=>s.classList.remove('active'));
+      const el = document.getElementById(id);
+      if(el) el.classList.add('active');
+      setTimeout(()=>{ if(el) el.querySelector('h3')?.focus(); }, 160);
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    navButtons.forEach(b=>{
+      b.addEventListener('click', ()=> navigateTo(b.getAttribute('data-target')));
+      b.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); navigateTo(b.getAttribute('data-target')); } });
+    });
+    document.addEventListener('DOMContentLoaded', ()=>{ navigateTo('content'); });
+
+    // Lightbox
+    const mediaItems = document.querySelectorAll('.media-item');
+    const lb = document.getElementById('lightbox');
+    const lbContent = document.getElementById('lightboxContent');
+    const lbClose = document.getElementById('lightboxClose');
+
+    mediaItems.forEach(item=>{
+      item.addEventListener('click', ()=>{
+        const type = item.getAttribute('data-type');
+        // prefer explicit data-src, otherwise fallback to contained img src
+        let src = item.getAttribute('data-src') || item.querySelector('img')?.src;
+        openLightbox(type, src);
+      });
+    });
+
+    function openLightbox(type, src){
+      lbContent.innerHTML = '';
+      if(!src) return;
+      if(type === 'image'){
+        const img = document.createElement('img');
+        img.src = src; img.alt = 'عرض الصورة'; img.loading = 'eager';
+        lbContent.appendChild(img);
+      } else if(type === 'video'){
+        const video = document.createElement('video');
+        video.controls = true; video.autoplay = true; video.playsInline = true;
+        const srcElem = document.createElement('source');
+        srcElem.src = src; video.appendChild(srcElem);
+        lbContent.appendChild(video);
+      }
+      lb.classList.add('active');
+      lb.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lb.classList.remove('active');
+      lbContent.innerHTML = '';
+      lb.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+    lbClose.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeLightbox(); });
+
+    // fallback: if AVIF fails to load try same-name .jpg
+    document.querySelectorAll('img').forEach(img=>{
+      img.addEventListener('error', ()=>{
+        const current = img.src;
+        if(current && current.match(/\.avif$/i)){
+          const jpg = current.replace(/\.avif$/i, '.jpg');
+          if(img.src !== jpg) img.src = jpg;
+        }
+      });
+    });
+
+  </script>
+</body>
+</html>
